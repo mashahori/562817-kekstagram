@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Мария Якименко](https://up.htmlacademy.ru/javascript/16/user/562817).
-* Наставник: `Неизвестно`.
+* Наставник: `Константин Мамаев (https://htmlacademy.ru/profile/meison)`.
 
 ---
 
