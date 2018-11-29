@@ -15,7 +15,7 @@ var PICTURES_COUNT = 25;
 var COMMENTS_COUNT = 5;
 
 var randomInteger = function (min, max) {
-  var rand = min - 0.5 + Math.random() * (max - min + 1)
+  var rand = min - 0.5 + Math.random() * (max - min + 1);
   rand = Math.round(rand);
   return rand;
 };
@@ -73,9 +73,9 @@ var socialComments = document.querySelector('.social__comments');
 
 socialComments.innerHtml = null;
 
-for (var i = 1; i < COMMENTS_COUNT - 1; i ++ ) {
+for (var j = 1; j < COMMENTS_COUNT - 1; j++) {
   bigPicture.querySelector('.social__comments').appendChild(socialComment.cloneNode(true));
-  socialComment.querySelector('.social__text').textContent = pictures[i].comments;
+  socialComment.querySelector('.social__text').textContent = pictures[j].comments;
   socialComment.querySelector('.social__picture').src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
 }
 
