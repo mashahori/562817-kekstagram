@@ -1,7 +1,7 @@
 'use strict';
 
 var similarListElement = document.querySelector('.pictures');
-var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');;
+var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 var pictureComments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -12,16 +12,17 @@ var pictureDescriptions = ['Тестим новую камеру!', 'Затус�
   'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......',
   'Вот это тачка!'];
 var PICTURES_COUNT = 25;
+var COMMENTS_COUNT = 5;
 
 var randomInteger = function (min, max) {
-    var rand = min - 0.5 + Math.random() * (max - min + 1)
-    rand = Math.round(rand);
-    return rand;
-  }
+  var rand = min - 0.5 + Math.random() * (max - min + 1)
+  rand = Math.round(rand);
+  return rand;
+};
 
 var randomString = function (commentDescriptions) {
-    return commentDescriptions[Math.floor(Math.random() * commentDescriptions.length)];
-  };
+  return commentDescriptions[Math.floor(Math.random() * commentDescriptions.length)];
+};
 
 var makePictures = function (pictureCount) {
   var totalPictures = [];
@@ -67,12 +68,16 @@ bigPicture.querySelector('.likes-count').textContent = pictures[0].likes;
 bigPicture.querySelector('.comments-count').textContent = pictureComments.length;
 bigPicture.querySelector('.social__caption').textContent = pictures[0].description;
 
-
 var socialComment = document.querySelector('.social__comment');
+var socialComments = document.querySelector('.social__comments');
 
-// bigPicture.querySelector('.social__comments').appendChild(socialComment.cloneNode(true));
-socialComment.querySelector('.social__text').textContent = pictures[0].comments;
-socialComment.querySelector('.social__picture').src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
+socialComments.innerHtml = null;
 
-// document.querySelector('.social__comment-count').classList.add('visually-hidden');
-// document.querySelector('.comments-loader').classList.add('visually-hidden');
+for (var i = 1; i < COMMENTS_COUNT - 1; i ++ ) {
+  bigPicture.querySelector('.social__comments').appendChild(socialComment.cloneNode(true));
+  socialComment.querySelector('.social__text').textContent = pictures[i].comments;
+  socialComment.querySelector('.social__picture').src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
+}
+
+document.querySelector('.social__comment-count').classList.add('visually-hidden');
+document.querySelector('.comments-loader').classList.add('visually-hidden');
