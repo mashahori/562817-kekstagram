@@ -24,7 +24,7 @@ var randomInteger = function (min, max) {
 var randomString = function (stringsArray, count) {
   var resultString = '';
   for (var i = 0; i < count; i++) {
-    if (i != 0) {
+    if (i !== 0) {
       resultString += ' ';
     }
     resultString += stringsArray[randomInteger(0, stringsArray.length - 1)];
