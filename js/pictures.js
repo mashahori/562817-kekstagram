@@ -12,7 +12,6 @@ var pictureDescriptions = ['Тестим новую камеру!', 'Затус�
   'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......',
   'Вот это тачка!'];
 var PICTURES_COUNT = 25;
-var COMMENTS_COUNT = 5;
 var AVATARS_COUNT = 6;
 var MAX_COMMENTS = 5;
 
@@ -26,7 +25,7 @@ var randomString = function (stringsArray, count) {
   var resultString = '';
   for (var i = 0; i < count; i++) {
     if (i != 0) {
-      resultString += ' ';
+      resultString +== ' ';
     }
     resultString += stringsArray[randomInteger(0, stringsArray.length - 1)];
   }
@@ -83,7 +82,7 @@ bigPicture.classList.remove('hidden');
 
 var bigPictureImg = bigPicture.querySelector('img');
 
-var createBigPicture = function(pictureNumber) {
+var createBigPicture = function (pictureNumber) {
   bigPictureImg.src = pictures[pictureNumber].url;
   bigPicture.querySelector('.likes-count').textContent = pictures[pictureNumber].likes;
   bigPicture.querySelector('.comments-count').textContent = pictures[pictureNumber].comments.length;
