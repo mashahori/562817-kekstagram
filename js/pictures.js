@@ -14,6 +14,8 @@ var pictureDescriptions = ['Тестим новую камеру!', 'Затус�
 var PICTURES_COUNT = 25;
 var AVATARS_COUNT = 6;
 var MAX_COMMENTS = 5;
+var MAX_LIKES = 200;
+var MIN_LIKES = 15;
 
 var randomInteger = function (min, max) {
   var rand = min - 0.5 + Math.random() * (max - min + 1);
@@ -48,7 +50,7 @@ var makePictures = function (pictureCount) {
   for (var i = 0; i < pictureCount; i++) {
     totalPictures.push({
       url: 'photos/' + (i + 1) + '.jpg',
-      likes: randomInteger(15, 200),
+      likes: randomInteger(MIN_LIKES, MAX_LIKES),
       comments: makeComments(randomInteger(0, MAX_COMMENTS)),
       description: randomString(pictureDescriptions, 1)
     });
