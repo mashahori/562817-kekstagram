@@ -1,5 +1,7 @@
 'use strict';
 
+var ESC_BUTTON = 27;
+var MAX_EFFECT_VALUE = 453;
 var similarListElement = document.querySelector('.pictures');
 var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
@@ -80,7 +82,7 @@ similarListElement.appendChild(fragment);
 
 
 var bigPicture = document.querySelector('.big-picture');
-bigPicture.classList.remove('hidden');
+// bigPicture.classList.remove('hidden');
 
 var bigPictureImg = bigPicture.querySelector('img');
 
@@ -109,3 +111,73 @@ for (var j = 1; j < pictures[0].comments.length; j++) {
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
+
+
+var uploadFile = document.querySelector('#upload-file');
+var uploadForm = document.querySelector('.img-upload__overlay');
+var uploadFormClose = document.querySelector('.img-upload__cancel');
+
+var closePopup = function () {
+  uploadForm.classList.add('hidden');
+};
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_BUTTON) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  uploadForm.classList.remove('hidden');
+};
+
+
+uploadFile.addEventListener('change', function() {
+  openPopup();
+  document.addEventListener('keydown', onPopupEscPress);
+});
+
+uploadFormClose.addEventListener('click', function () {
+  closePopup();
+  document.removeEventListener('keydown', onPopupEscPress);
+});
+
+uploadFormClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_BUTTON) {
+    closePopup();
+    document.removeEventListener('keydown', onPopupEscPress);
+  }
+});
+
+
+var thumbnails = document.querySelectorAll('.effects__radio');
+
+var fullPhotoContainer = document.querySelector('.img-upload__preview');
+var fullPhoto = fullPhotoContainer.querySelector('img');
+var effectsPreviews = ['effects__preview--none', 'effects__preview--chrome',
+ 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat'];
+
+ var addThumbnailClickHandler = function (thumbnail, photo) {
+   thumbnail.addEventListener('click', function () {
+     fullPhoto.removeAttribute('class');
+     fullPhoto.classList.add(photo);
+   });
+ };
+
+for (var i = 0; i < thumbnails.length; i++ ) {
+  addThumbnailClickHandler(thumbnails[i], effectsPreviews[i]);
+}
+
+var effectLevelPin = document.querySelector('.effect-level__pin');
+var effectLevel = document.querySelector('.effect-level');
+var effectLevelValue = document.querySelector('.effect-level__value');
+
+effectLevel.addEventListener('click', function (evt) {
+  var n = evt.clientX;
+    console.log(n);
+    effectLevelValue.value = n;
+     // if (evt.clientX < 715 && evt.clientX > 255) {
+     //
+     // }
+    //
+});
