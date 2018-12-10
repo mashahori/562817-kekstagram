@@ -82,9 +82,11 @@ similarListElement.appendChild(fragment);
 
 
 var bigPicture = document.querySelector('.big-picture');
-// bigPicture.classList.remove('hidden');
+
 
 var bigPictureImg = bigPicture.querySelector('img');
+var pictureImg = document.querySelector('.picture__img');
+var pictureClose = document.querySelector('.big-picture__cancel');
 
 var createBigPicture = function (pictureNumber) {
   bigPictureImg.src = pictures[pictureNumber].url;
@@ -93,7 +95,16 @@ var createBigPicture = function (pictureNumber) {
   bigPicture.querySelector('.social__caption').textContent = pictures[pictureNumber].description;
 };
 
-createBigPicture(0);
+similarListElement.addEventListener('click', function(evt) {
+    var target = evt.target;
+    console.log(target);
+    bigPicture.classList.remove('hidden');
+    createBigPicture(0);
+});
+
+pictureClose.addEventListener('click', function() {
+    bigPicture.classList.add('hidden');
+});
 
 var socialComment = document.querySelector('.social__comment');
 var socialComments = document.querySelector('.social__comments');
