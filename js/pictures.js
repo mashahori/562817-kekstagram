@@ -97,7 +97,8 @@ var createBigPicture = function (pictureNumber) {
 
 similarListElement.addEventListener('click', function(evt) {
     var target = evt.target;
-    console.log(target);
+    // console.log(target);
+    if (target.tagName != 'IMG') return;
     bigPicture.classList.remove('hidden');
     createBigPicture(0);
 });
@@ -128,6 +129,10 @@ var uploadFile = document.querySelector('#upload-file');
 var uploadForm = document.querySelector('.img-upload__overlay');
 var uploadFormClose = document.querySelector('.img-upload__cancel');
 
+var scaleSmaller = document.querySelector('.scale__control--smaller');
+var scaleBigger = document.querySelector('.scale__control--bigger');
+var scaleValue = document.querySelector('.scale__control--value');
+
 var closePopup = function () {
   uploadForm.classList.add('hidden');
 };
@@ -140,6 +145,7 @@ var onPopupEscPress = function (evt) {
 
 var openPopup = function () {
   uploadForm.classList.remove('hidden');
+  scaleValue.value = '100%';
 };
 
 
@@ -161,34 +167,117 @@ uploadFormClose.addEventListener('keydown', function (evt) {
 });
 
 
-var thumbnails = document.querySelectorAll('.effects__radio');
-
 var fullPhotoContainer = document.querySelector('.img-upload__preview');
 var fullPhoto = fullPhotoContainer.querySelector('img');
-var effectsPreviews = ['effects__preview--none', 'effects__preview--chrome',
- 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat'];
 
- var addThumbnailClickHandler = function (thumbnail, photo) {
-   thumbnail.addEventListener('click', function () {
-     fullPhoto.removeAttribute('class');
-     fullPhoto.classList.add(photo);
-   });
- };
-
-for (var i = 0; i < thumbnails.length; i++ ) {
-  addThumbnailClickHandler(thumbnails[i], effectsPreviews[i]);
-}
-
-var effectLevelPin = document.querySelector('.effect-level__pin');
 var effectLevel = document.querySelector('.effect-level');
+var effectLevelPin = document.querySelector('.effect-level__pin');
+var effectLevelLine = document.querySelector('.effect-level__line');
 var effectLevelValue = document.querySelector('.effect-level__value');
+var effectLevelDepth = document.querySelector('.effect-level__depth');
+var effectsList = document.querySelector('.effects__list');
 
-effectLevel.addEventListener('click', function (evt) {
-  var n = evt.clientX;
-    console.log(n);
-    effectLevelValue.value = n;
-     // if (evt.clientX < 715 && evt.clientX > 255) {
-     //
-     // }
-    //
+
+effectsList.addEventListener('change', function (evt) { // Изменение фильтра большой картинки при переключении превьюшек
+  effectLevelPin.style.left = '100%';
+  effectLevelValue.value = 100;
+  effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
+  var target = evt.target.value;
+  switch(target) {
+    case 'none':
+      fullPhotoContainer.style.filter = "";
+      effectLevel.classList.add('hidden');
+      break;
+    case 'chrome':
+      fullPhotoContainer.style.filter = "grayscale(1)";
+      effectLevel.classList.remove('hidden');
+      effectLevelLine.addEventListener('click', function(evt) {
+        var effectLevelClick = evt.offsetX;
+        var lineWidth = effectLevelLine.offsetWidth;
+        var position = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelPin.style.left = position + '%';
+        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelDepth.style.width = position + '%';
+        fullPhotoContainer.style.filter = "grayscale(" + position/100 + ")";
+      });
+      break;
+    case 'sepia':
+      fullPhotoContainer.style.filter = "sepia(1)";
+      effectLevel.classList.remove('hidden');
+      effectLevelLine.addEventListener('click', function(evt) {
+        var effectLevelClick = evt.offsetX;
+        var lineWidth = effectLevelLine.offsetWidth;
+        var position = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelPin.style.left = position + '%';
+        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelDepth.style.width = position + '%';
+        fullPhotoContainer.style.filter = "sepia(" + position/100 + ")";
+      });
+      break;
+    case 'marvin':
+      fullPhotoContainer.style.filter = "invert(100%)";
+      effectLevel.classList.remove('hidden');
+      effectLevelLine.addEventListener('click', function(evt) {
+        var effectLevelClick = evt.offsetX;
+        var lineWidth = effectLevelLine.offsetWidth;
+        var position = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelPin.style.left = position + '%';
+        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelDepth.style.width = position + '%';
+        fullPhotoContainer.style.filter = "invert(" + position + "%)";
+      });
+      break;
+    case 'phobos':
+      fullPhotoContainer.style.filter = "blur(3px)";
+      effectLevel.classList.remove('hidden');
+      effectLevelLine.addEventListener('click', function(evt) {
+        var effectLevelClick = evt.offsetX;
+        var lineWidth = effectLevelLine.offsetWidth;
+        var position = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelPin.style.left = position + '%';
+        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelDepth.style.width = position + '%';
+        fullPhotoContainer.style.filter = "blur(" + (position/100 * 3) + "px)";
+      });
+      break;
+    case 'heat':
+      fullPhotoContainer.style.filter = "brightness(3)";
+      effectLevel.classList.remove('hidden');
+      effectLevelLine.addEventListener('click', function(evt) {  // Изменение шкалы по клику
+        var effectLevelClick = evt.offsetX;
+        var lineWidth = effectLevelLine.offsetWidth;
+        var position = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelPin.style.left = position + '%';
+        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
+        effectLevelDepth.style.width = position + '%';
+        fullPhotoContainer.style.filter = "brightness(" + (position/100 * 2 + 1) + ")";
+      });
+      break;
+  }
+});
+
+//Изменение размера изображения
+
+scaleSmaller.addEventListener('click', function(evt) {
+  var currentScale = scaleValue.value;
+  currentScale = parseInt(currentScale);
+  if (currentScale > 25) {
+    currentScale = currentScale - 25;
+    scaleValue.value = currentScale + '%';
+    fullPhotoContainer.style.transform ='scale(' + currentScale/100 + ')';
+  } else {
+    scaleValue.value = '25%';
+  }
+});
+
+scaleBigger.addEventListener('click', function(evt) {
+  var currentScale = scaleValue.value;
+  currentScale = parseInt(currentScale);
+  if (currentScale < 100) {
+    currentScale = currentScale + 25;
+    scaleValue.value = currentScale + '%';
+  fullPhotoContainer.style.transform ='scale(' + currentScale/100 + ')';
+} else {
+  scaleValue.value = '100%';
+}
 });
