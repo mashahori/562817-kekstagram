@@ -1,7 +1,10 @@
 'use strict';
 
 var ESC_BUTTON = 27;
-var MAX_EFFECT_VALUE = 453;
+var ENTER_BUTTON = 13;
+var MIN_SCALE = 25;
+var MAX_SCALE = 100;
+var SCALE_STEP = 25;
 var similarListElement = document.querySelector('.pictures');
 var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
@@ -82,10 +85,7 @@ similarListElement.appendChild(fragment);
 
 
 var bigPicture = document.querySelector('.big-picture');
-
-
 var bigPictureImg = bigPicture.querySelector('img');
-var pictureImg = document.querySelector('.picture__img');
 var pictureClose = document.querySelector('.big-picture__cancel');
 
 var createBigPicture = function (pictureNumber) {
@@ -95,16 +95,15 @@ var createBigPicture = function (pictureNumber) {
   bigPicture.querySelector('.social__caption').textContent = pictures[pictureNumber].description;
 };
 
-similarListElement.addEventListener('click', function(evt) {
-    var target = evt.target;
-    // console.log(target);
-    if (target.tagName != 'IMG') return;
-    bigPicture.classList.remove('hidden');
-    createBigPicture(0);
+similarListElement.addEventListener('click', function (evt) {
+  var target = evt.target;
+  if (target.tagName !== 'IMG') { return; }
+  bigPicture.classList.remove('hidden');
+  createBigPicture(0);
 });
 
-pictureClose.addEventListener('click', function() {
-    bigPicture.classList.add('hidden');
+pictureClose.addEventListener('click', function () {
+  bigPicture.classList.add('hidden');
 });
 
 var socialComment = document.querySelector('.social__comment');
@@ -132,6 +131,7 @@ var uploadFormClose = document.querySelector('.img-upload__cancel');
 var scaleSmaller = document.querySelector('.scale__control--smaller');
 var scaleBigger = document.querySelector('.scale__control--bigger');
 var scaleValue = document.querySelector('.scale__control--value');
+var scale = document.querySelector('.scale');
 
 var closePopup = function () {
   uploadForm.classList.add('hidden');
@@ -149,7 +149,7 @@ var openPopup = function () {
 };
 
 
-uploadFile.addEventListener('change', function() {
+uploadFile.addEventListener('change', function () {
   openPopup();
   document.addEventListener('keydown', onPopupEscPress);
 });
@@ -168,7 +168,6 @@ uploadFormClose.addEventListener('keydown', function (evt) {
 
 
 var fullPhotoContainer = document.querySelector('.img-upload__preview');
-var fullPhoto = fullPhotoContainer.querySelector('img');
 
 var effectLevel = document.querySelector('.effect-level');
 var effectLevelPin = document.querySelector('.effect-level__pin');
@@ -177,107 +176,125 @@ var effectLevelValue = document.querySelector('.effect-level__value');
 var effectLevelDepth = document.querySelector('.effect-level__depth');
 var effectsList = document.querySelector('.effects__list');
 
+var applyCurrentEffect = function() {}; // по умолчанию пустая функция
+
+var applyChrome = function (filterPosition) {
+  fullPhotoContainer.style.filter = 'grayscale(' + filterPosition / 100 + ')';
+}
+
+var applySepia = function (filterPosition) {
+  fullPhotoContainer.style.filter = 'sepia(' + filterPosition / 100 + ')';
+}
+
+var applyMarvin = function (filterPosition) {
+  fullPhotoContainer.style.filter = 'invert(' + filterPosition + '%)';
+}
+
+var applyPhobos = function (filterPosition) {
+  fullPhotoContainer.style.filter = 'blur(' + (filterPosition / 100 * 3) + 'px)';
+}
+
+var applyHeat = function (filterPosition) {
+  fullPhotoContainer.style.filter = 'brightness(' + (filterPosition / 100 * 2 + 1) + ')';
+}
 
 effectsList.addEventListener('change', function (evt) { // Изменение фильтра большой картинки при переключении превьюшек
   effectLevelPin.style.left = '100%';
   effectLevelValue.value = 100;
   effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
   var target = evt.target.value;
-  switch(target) {
+  switch (target) {
     case 'none':
-      fullPhotoContainer.style.filter = "";
+      fullPhotoContainer.style.filter = '';
       effectLevel.classList.add('hidden');
       break;
     case 'chrome':
-      fullPhotoContainer.style.filter = "grayscale(1)";
+      fullPhotoContainer.style.filter = 'grayscale(1)';
       effectLevel.classList.remove('hidden');
-      effectLevelLine.addEventListener('click', function(evt) {
-        var effectLevelClick = evt.offsetX;
-        var lineWidth = effectLevelLine.offsetWidth;
-        var position = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelPin.style.left = position + '%';
-        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelDepth.style.width = position + '%';
-        fullPhotoContainer.style.filter = "grayscale(" + position/100 + ")";
-      });
+      applyCurrentEffect = applyChrome;
       break;
     case 'sepia':
-      fullPhotoContainer.style.filter = "sepia(1)";
+      fullPhotoContainer.style.filter = 'sepia(1)';
       effectLevel.classList.remove('hidden');
-      effectLevelLine.addEventListener('click', function(evt) {
-        var effectLevelClick = evt.offsetX;
-        var lineWidth = effectLevelLine.offsetWidth;
-        var position = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelPin.style.left = position + '%';
-        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelDepth.style.width = position + '%';
-        fullPhotoContainer.style.filter = "sepia(" + position/100 + ")";
-      });
+      applyCurrentEffect = applySepia;
       break;
     case 'marvin':
-      fullPhotoContainer.style.filter = "invert(100%)";
+      fullPhotoContainer.style.filter = 'invert(100%)';
       effectLevel.classList.remove('hidden');
-      effectLevelLine.addEventListener('click', function(evt) {
-        var effectLevelClick = evt.offsetX;
-        var lineWidth = effectLevelLine.offsetWidth;
-        var position = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelPin.style.left = position + '%';
-        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelDepth.style.width = position + '%';
-        fullPhotoContainer.style.filter = "invert(" + position + "%)";
-      });
+      applyCurrentEffect = applyMarvin;
       break;
     case 'phobos':
-      fullPhotoContainer.style.filter = "blur(3px)";
+      fullPhotoContainer.style.filter = 'blur(3px)';
       effectLevel.classList.remove('hidden');
-      effectLevelLine.addEventListener('click', function(evt) {
-        var effectLevelClick = evt.offsetX;
-        var lineWidth = effectLevelLine.offsetWidth;
-        var position = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelPin.style.left = position + '%';
-        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelDepth.style.width = position + '%';
-        fullPhotoContainer.style.filter = "blur(" + (position/100 * 3) + "px)";
-      });
+      applyCurrentEffect = applyPhobos;
       break;
     case 'heat':
-      fullPhotoContainer.style.filter = "brightness(3)";
+      fullPhotoContainer.style.filter = 'brightness(3)';
       effectLevel.classList.remove('hidden');
-      effectLevelLine.addEventListener('click', function(evt) {  // Изменение шкалы по клику
-        var effectLevelClick = evt.offsetX;
-        var lineWidth = effectLevelLine.offsetWidth;
-        var position = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelPin.style.left = position + '%';
-        effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
-        effectLevelDepth.style.width = position + '%';
-        fullPhotoContainer.style.filter = "brightness(" + (position/100 * 2 + 1) + ")";
-      });
+      applyCurrentEffect = applyHeat;
       break;
   }
 });
 
+effectLevelLine.addEventListener('click', function (evtLevel) { //определяем позицию клика на шкале
+  var effectLevelClick = evtLevel.offsetX;
+  var lineWidth = effectLevelLine.offsetWidth;
+  var position = Math.round((effectLevelClick / lineWidth) * 100);
+  effectLevelPin.style.left = position + '%';
+  effectLevelValue.value = Math.round((effectLevelClick / lineWidth) * 100);
+  effectLevelDepth.style.width = position + '%';
+  fullPhotoContainer.style.filter = 'blur(' + (position / 100 * 3) + 'px)';
+  applyCurrentEffect(position);
+});
+
 //Изменение размера изображения
 
-scaleSmaller.addEventListener('click', function(evt) {
+// var calculateScale = function (scale, direction) {          //увеличение или уменьшение value
+//   if (scale < MAX_SCALE && scale > MIN_SCALE) {
+//     return scale + SCALE_STEP * direction;
+//   } else {
+//     return scale;
+//     console.log('no way');
+//   }
+// };
+
+scaleSmaller.addEventListener('click', function () {
   var currentScale = scaleValue.value;
   currentScale = parseInt(currentScale);
-  if (currentScale > 25) {
-    currentScale = currentScale - 25;
+  if (currentScale > MIN_SCALE) {
+    currentScale = currentScale - SCALE_STEP;
     scaleValue.value = currentScale + '%';
-    fullPhotoContainer.style.transform ='scale(' + currentScale/100 + ')';
+    fullPhotoContainer.style.transform ='scale(' + currentScale / 100 + ')';
   } else {
     scaleValue.value = '25%';
   }
 });
 
-scaleBigger.addEventListener('click', function(evt) {
+scaleBigger.addEventListener('click', function () {
   var currentScale = scaleValue.value;
   currentScale = parseInt(currentScale);
-  if (currentScale < 100) {
-    currentScale = currentScale + 25;
+  if (currentScale < MAX_SCALE) {
+    currentScale = currentScale + SCALE_STEP;
     scaleValue.value = currentScale + '%';
-  fullPhotoContainer.style.transform ='scale(' + currentScale/100 + ')';
+  fullPhotoContainer.style.transform ='scale(' + currentScale / 100 + ')';
 } else {
   scaleValue.value = '100%';
 }
 });
+
+// scale.addEventListener('click', function (evt) {
+//   var targetScale = evt.target;
+//   var currentScale = scaleValue.value;
+//   currentScale = parseInt(currentScale);
+//   if (targetScale.classList.contains('scale__control--smaller')) {
+//     var newScale = calculateScale(currentScale, -1);
+//     console.log('less');
+//   } else if (targetScale.classList.contains('scale__control--bigger')) {
+//     var newScale = calculateScale(currentScale, 1);
+//     console.log(newScale);
+//   } else {
+//     console.log('no');
+//   }
+//   scaleValue.value = newScale + '%';
+//   fullPhotoContainer.style.transform ='scale(' + newScale / 100 + ')';
+// });
