@@ -97,7 +97,9 @@ var createBigPicture = function (pictureNumber) {
 
 similarListElement.addEventListener('click', function (evt) {
   var target = evt.target;
-  if (target.tagName !== 'IMG') { return; }
+  if (target.tagName !== 'IMG') {
+     return;
+    }
   bigPicture.classList.remove('hidden');
   createBigPicture(0);
 });
@@ -131,7 +133,7 @@ var uploadFormClose = document.querySelector('.img-upload__cancel');
 var scaleSmaller = document.querySelector('.scale__control--smaller');
 var scaleBigger = document.querySelector('.scale__control--bigger');
 var scaleValue = document.querySelector('.scale__control--value');
-var scale = document.querySelector('.scale');
+// var scale = document.querySelector('.scale');
 
 var closePopup = function () {
   uploadForm.classList.add('hidden');
@@ -176,27 +178,27 @@ var effectLevelValue = document.querySelector('.effect-level__value');
 var effectLevelDepth = document.querySelector('.effect-level__depth');
 var effectsList = document.querySelector('.effects__list');
 
-var applyCurrentEffect = function() {}; // по умолчанию пустая функция
+var applyCurrentEffect = function () {}; // по умолчанию пустая функция
 
 var applyChrome = function (filterPosition) {
   fullPhotoContainer.style.filter = 'grayscale(' + filterPosition / 100 + ')';
-}
+};
 
 var applySepia = function (filterPosition) {
   fullPhotoContainer.style.filter = 'sepia(' + filterPosition / 100 + ')';
-}
+};
 
 var applyMarvin = function (filterPosition) {
   fullPhotoContainer.style.filter = 'invert(' + filterPosition + '%)';
-}
+};
 
 var applyPhobos = function (filterPosition) {
   fullPhotoContainer.style.filter = 'blur(' + (filterPosition / 100 * 3) + 'px)';
-}
+};
 
 var applyHeat = function (filterPosition) {
   fullPhotoContainer.style.filter = 'brightness(' + (filterPosition / 100 * 2 + 1) + ')';
-}
+};
 
 effectsList.addEventListener('change', function (evt) { // Изменение фильтра большой картинки при переключении превьюшек
   effectLevelPin.style.left = '100%';
@@ -236,7 +238,7 @@ effectsList.addEventListener('change', function (evt) { // Изменение ф
   }
 });
 
-effectLevelLine.addEventListener('click', function (evtLevel) { //определяем позицию клика на шкале
+effectLevelLine.addEventListener('click', function (evtLevel) { // определяем позицию клика на шкале
   var effectLevelClick = evtLevel.offsetX;
   var lineWidth = effectLevelLine.offsetWidth;
   var position = Math.round((effectLevelClick / lineWidth) * 100);
@@ -247,9 +249,9 @@ effectLevelLine.addEventListener('click', function (evtLevel) { //определ
   applyCurrentEffect(position);
 });
 
-//Изменение размера изображения
+// Изменение размера изображения
 
-// var calculateScale = function (scale, direction) {          //увеличение или уменьшение value
+// var calculateScale = function (scale, direction) {          // увеличение или уменьшение value
 //   if (scale < MAX_SCALE && scale > MIN_SCALE) {
 //     return scale + SCALE_STEP * direction;
 //   } else {
@@ -260,7 +262,7 @@ effectLevelLine.addEventListener('click', function (evtLevel) { //определ
 
 scaleSmaller.addEventListener('click', function () {
   var currentScale = scaleValue.value;
-  currentScale = parseInt(currentScale);
+  currentScale = parseInt(currentScale, 10);
   if (currentScale > MIN_SCALE) {
     currentScale = currentScale - SCALE_STEP;
     scaleValue.value = currentScale + '%';
@@ -272,14 +274,14 @@ scaleSmaller.addEventListener('click', function () {
 
 scaleBigger.addEventListener('click', function () {
   var currentScale = scaleValue.value;
-  currentScale = parseInt(currentScale);
+  currentScale = parseInt(currentScale, 10);
   if (currentScale < MAX_SCALE) {
     currentScale = currentScale + SCALE_STEP;
     scaleValue.value = currentScale + '%';
-  fullPhotoContainer.style.transform ='scale(' + currentScale / 100 + ')';
-} else {
-  scaleValue.value = '100%';
-}
+    fullPhotoContainer.style.transform ='scale(' + currentScale / 100 + ')';
+  } else {
+    scaleValue.value = '100%';
+  }
 });
 
 // scale.addEventListener('click', function (evt) {
