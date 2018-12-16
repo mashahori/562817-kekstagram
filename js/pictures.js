@@ -98,8 +98,8 @@ var createBigPicture = function (pictureNumber) {
 similarListElement.addEventListener('click', function (evt) {
   var target = evt.target;
   if (target.tagName !== 'IMG') {
-     return;
-    }
+    return;
+  }
   bigPicture.classList.remove('hidden');
   createBigPicture(0);
 });
@@ -266,7 +266,7 @@ scaleSmaller.addEventListener('click', function () {
   if (currentScale > MIN_SCALE) {
     currentScale = currentScale - SCALE_STEP;
     scaleValue.value = currentScale + '%';
-    fullPhotoContainer.style.transform ='scale(' + currentScale / 100 + ')';
+    fullPhotoContainer.style.transform = 'scale(' + currentScale / 100 + ')';
   } else {
     scaleValue.value = '25%';
   }
@@ -278,7 +278,7 @@ scaleBigger.addEventListener('click', function () {
   if (currentScale < MAX_SCALE) {
     currentScale = currentScale + SCALE_STEP;
     scaleValue.value = currentScale + '%';
-    fullPhotoContainer.style.transform ='scale(' + currentScale / 100 + ')';
+    fullPhotoContainer.style.transform = 'scale(' + currentScale / 100 + ')';
   } else {
     scaleValue.value = '100%';
   }
