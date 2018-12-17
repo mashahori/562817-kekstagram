@@ -58,7 +58,7 @@ var makePictures = function (pictureCount) {
       likes: randomInteger(MIN_LIKES, MAX_LIKES),
       comments: makeComments(randomInteger(0, MAX_COMMENTS)),
       description: randomString(pictureDescriptions, 1),
-      id: '#'+i
+      id: '#'+ i
     });
   }
   return totalPictures;
@@ -290,21 +290,20 @@ var checkHashtag = function (elementHashtag) {
     return false;
   }
   if (!newArrayHashtag.includes(elementHashtag)) {
-      newArrayHashtag.push(elementHashtag);
+    newArrayHashtag.push(elementHashtag);
   }
   return true;
-}
+};
 
 var getHashtags = function () {
   var hashtags = textHashtags.value;
   var arrayHashtags = hashtags.split(' ', 5);
-  for (var i = 0; i < arrayHashtags; i++ ) {
-    checkHashtag(i);
+  for (var index = 0; index < arrayHashtags; index ++) {
+    checkHashtag(index);
   }
   if (!checkHashtag) {
     textHashtags.setCustomValidity('Ошибка!');
-    console.log('Ошибка!');
   }
 };
 
-// textHashtags.addEventListener('change', getHashtags);
+textHashtags.addEventListener('change', getHashtags);
