@@ -275,35 +275,3 @@ scaleBigger.addEventListener('click', function () {
     scaleValue.value = '100%';
   }
 });
-
-// проверка хэштегов
-
-var textHashtags = document.querySelector('.text__hashtags');
-var newArrayHashtag = [];
-
-var checkHashtag = function (elementHashtag) {
-  elementHashtag.toLowerCas();
-  if (elementHashtag.charAt(0) !== '#') {
-    return false;
-  }
-  if (elementHashtag.length > 20 && elementHashtag.length < 2) {
-    return false;
-  }
-  if (!newArrayHashtag.includes(elementHashtag)) {
-    newArrayHashtag.push(elementHashtag);
-  }
-  return true;
-};
-
-var getHashtags = function () {
-  var hashtags = textHashtags.value;
-  var arrayHashtags = hashtags.split(' ', 5);
-  for (var index = 0; index < arrayHashtags; index++) {
-    checkHashtag(index);
-  }
-  if (!checkHashtag) {
-    textHashtags.setCustomValidity('Ошибка!');
-  }
-};
-
-textHashtags.addEventListener('change', getHashtags);
