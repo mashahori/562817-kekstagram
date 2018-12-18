@@ -275,3 +275,51 @@ scaleBigger.addEventListener('click', function () {
     scaleValue.value = '100%';
   }
 });
+
+//проверка хэштегов
+
+var textHashtags = document.querySelector('.text__hashtags');
+var newArrayHashtag = [];
+
+//проверка одного элемента на валидность
+
+var checkHashtag = function (elementHashtag) {
+  var re = /#[A-Za-z0-9](?:\s|$)/g;
+  re.test(elementHashtag);
+
+  // if (elementHashtag.length >=19 || elementHashtag.length < 1) {
+  //   return false;
+  // }
+  // if (newArrayHashtag.includes(elementHashtag)) {
+  //   return false;
+  // }
+  // return true;
+  // newArrayHashtag.push(elementHashtag);
+};
+
+
+//1.достаем value и создаем массив строк
+
+var getHashtags = function() {
+  var hashtags = textHashtags.value;
+  var arrayHashtags = hashtags.split(' ');
+  if (arrayHashtags.length <= 5) {
+    for (var index = 0; index < arrayHashtags.length; index++) {
+      checkHashtag(index);
+    }
+  } else {
+    textHashtags.setCustomValidity('Слишком много хэштегов!');
+    hashtags = '';
+  }
+  var flag = checkHashtag(index);
+  if (flag) {
+    textHashtags.setCustomValidity('все ок');
+    hashtags = '';
+  } else {
+    textHashtags.setCustomValidity('Ошибка проверки');
+    hashtags = '';
+  }
+};
+
+// 0. вызываем функцию при изменении input
+textHashtags.addEventListener('change', getHashtags);
