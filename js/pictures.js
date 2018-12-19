@@ -290,7 +290,7 @@ var checkHashtag = function (elementHashtag) {
   } else if (elementHashtag.length === 1) {
     return 0;
   } else {
-      return 1;
+    return 1;
   }
 };
 
@@ -311,8 +311,7 @@ var getHashtags = function () {
         textHashtags.setCustomValidity('Хэштеги не должны повторяться!');
       }
     }
-    console.log(flagSum);
-    if (flag === arrayHashtags.length) {
+    if (flagSum === arrayHashtags.length) {
       textHashtags.setCustomValidity('Все ок!');
     } else {
       textHashtags.setCustomValidity('Ошибка!');
