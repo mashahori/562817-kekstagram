@@ -275,3 +275,52 @@ scaleBigger.addEventListener('click', function () {
     scaleValue.value = '100%';
   }
 });
+
+// проверка хэштегов
+
+var textHashtags = document.querySelector('.text__hashtags');
+
+// 3.проверка одного элемента на валидность
+
+var checkHashtag = function (elementHashtag) {
+  if (elementHashtag.charAt(0) !== '#' || elementHashtag.length >= 20 || elementHashtag.length === 1) {
+    return 0;
+  } else {
+    return 1;
+  }
+};
+
+// 2.достаем value и создаем массив строк, проверяем на повторение, пишем сообщение
+
+var getHashtags = function () {
+  var hashtags = textHashtags.value;
+  hashtags.toLowerCase();
+  var arrayHashtags = hashtags.split(' ');
+  if (arrayHashtags.length < 5) {
+    var newArrayHashtag = [];
+    var flagSum = 0;
+    for (var index = 0; index < arrayHashtags.length; index++) {
+      if (!newArrayHashtag.includes(index)) {
+        flagSum += checkHashtag(index);
+        newArrayHashtag.push(index);
+      } else {
+        textHashtags.setCustomValidity('Хэштеги не должны повторяться!');
+      }
+    }
+    if (flagSum === arrayHashtags.length) {
+      textHashtags.setCustomValidity('Все ок!');
+    } else {
+      textHashtags.setCustomValidity('Ошибка!');
+    }
+  } else {
+    textHashtags.setCustomValidity('Не больше 5 хэштегов!');
+  }
+};
+
+// 1. при фокусе обнуляем значение
+textHashtags.addEventListener('focus', function () {
+  textHashtags.setCustomValidity('');
+});
+
+// 2. вызываем функцию при потере фокуса
+textHashtags.addEventListener('blur', getHashtags);
