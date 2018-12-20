@@ -283,11 +283,7 @@ var textHashtags = document.querySelector('.text__hashtags');
 // 3.проверка одного элемента на валидность
 
 var checkHashtag = function (elementHashtag) {
-  if (elementHashtag.charAt(0) !== '#') {
-    return 0;
-  } else if (elementHashtag.length >= 20) {
-    return 0;
-  } else if (elementHashtag.length === 1) {
+  if (elementHashtag.charAt(0) !== '#' || elementHashtag.length >= 20 || elementHashtag.length === 1) {
     return 0;
   } else {
     return 1;
