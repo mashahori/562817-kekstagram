@@ -239,16 +239,41 @@ effectsList.addEventListener('change', function (evt) { // Изменение ф
   }
 });
 
-effectLevelLine.addEventListener('click', function (evtLevel) { // определяем позицию клика на шкале
-  var effectLevelClick = evtLevel.offsetX;
-  var lineWidth = effectLevelLine.offsetWidth;
-  var position = Math.round((effectLevelClick / lineWidth) * 100);
-  effectLevelPin.style.left = position + '%';
-  effectLevelValue.value = position * 100;
-  effectLevelDepth.style.width = position + '%';
-  fullPhotoContainer.style.filter = 'blur(' + (position / 100 * 3) + 'px)';
-  applyCurrentEffect(position);
+// Drag n Drop для пин маркера
+
+effectLevelPin.addEventListener('mousedown', function (evtStart) {
+  evtStart.preventDefault();
+  var effectStartCoords = evtStart.offsetX;
+
+  var onMouseMove = function (evtMove) {
+    evtMove.preventDefault();
+
+    var shift = evtMove.offsetX - effectStartCoords;
+
+    effectStartCoords = evtMove.offsetX;
+
+    var position = effectStartCoords - shift;
+    var lineWidth = effectLevelLine.offsetWidth;
+    position = Math.round((effectStartCoords / lineWidth) * 100);
+    if (position < 100 && position > 0) {
+      effectLevelPin.style.left = position + '%';
+      effectLevelValue.value = position * 100;
+      effectLevelDepth.style.width = position + '%';
+      applyCurrentEffect(position);
+    }
+  };
+
+  var onMouseUp = function (evtUp) {
+    evtUp.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
+
 
 // Изменение размера изображения
 
