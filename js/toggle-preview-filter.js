@@ -1,8 +1,11 @@
+'use strict';
+
 (function () {
   var effectLevelValue = document.querySelector('.effect-level__value');
   var effectLevelDepth = document.querySelector('.effect-level__depth');
   var effectLevelLine = document.querySelector('.effect-level__line');
   var effectLevel = document.querySelector('.effect-level');
+  var effectLevelPin = document.querySelector('.effect-level__pin');
 
   var applyCurrentEffect = function () {}; // по умолчанию пустая функция
 
@@ -41,8 +44,8 @@
         effectLevel.classList.remove('hidden');
         applyCurrentEffect = window.applyHeat;
         break;
-  }
-  window.applyCurrentEffect = applyCurrentEffect;
-  window.togglePreviewFilter = togglePreviewFilter;
-}
+    }
+    window.applyCurrentEffect = applyCurrentEffect;
+    window.togglePreviewFilter = togglePreviewFilter;
+  };
 })();

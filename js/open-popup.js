@@ -3,7 +3,7 @@
 (function () {
   var openPopup = function (uploadForm, scaleValue) {
     uploadForm.classList.remove('hidden');
-    scaleValue.value = '100%';
+    window.scaleValue.value = '100%';
   };
   window.openPopup = openPopup;
 })();

@@ -4,6 +4,7 @@
   var effectLevelLine = document.querySelector('.effect-level__line');
   var effectLevelValue = document.querySelector('.effect-level__value');
   var effectLevelDepth = document.querySelector('.effect-level__depth');
+  var effectLevelPin = document.querySelector('.effect-level__pin');
 
   var dragAndDrop = function (evtStart) {
     evtStart.preventDefault();
@@ -23,7 +24,7 @@
         effectLevelPin.style.left = position + '%';
         effectLevelValue.value = position * 100;
         effectLevelDepth.style.width = position + '%';
-        window.applyCurrentEffect;
+        window.applyCurrentEffect(position);
       }
     };
 

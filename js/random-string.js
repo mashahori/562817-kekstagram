@@ -9,7 +9,7 @@
       }
       resultString += stringsArray[window.randomInteger(0, stringsArray.length - 1)];
     }
-  return resultString;
+    return resultString;
   };
   window.randomString = randomString;
 })();
