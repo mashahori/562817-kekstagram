@@ -7,9 +7,10 @@
   var effectLevel = document.querySelector('.effect-level');
   var effectLevelPin = document.querySelector('.effect-level__pin');
 
-  var applyCurrentEffect = function () {}; // по умолчанию пустая функция
+  // var applyCurrentEffect = function () {}; // по умолчанию пустая функция
 
   var togglePreviewFilter = function (evt) {
+    console.log('lujhv')
     effectLevelPin.style.left = '100%';
     effectLevelValue.value = 100;
     effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
@@ -22,7 +23,7 @@
       case 'chrome':
         window.fullPhotoContainer.style.filter = 'grayscale(1)';
         effectLevel.classList.remove('hidden');
-        applyCurrentEffect = window.applyChrome;
+        window.applyCurrentEffect = window.applyChrome;
         break;
       case 'sepia':
         window.fullPhotoContainer.style.filter = 'sepia(1)';
@@ -32,20 +33,20 @@
       case 'marvin':
         window.fullPhotoContainer.style.filter = 'invert(100%)';
         effectLevel.classList.remove('hidden');
-        applyCurrentEffect = window.applyMarvin;
+        window.applyCurrentEffect = window.applyMarvin;
         break;
       case 'phobos':
         window.fullPhotoContainer.style.filter = 'blur(3px)';
         effectLevel.classList.remove('hidden');
-        applyCurrentEffect = window.applyPhobos;
+        window.applyCurrentEffect = window.applyPhobos;
         break;
       case 'heat':
         window.fullPhotoContainer.style.filter = 'brightness(3)';
         effectLevel.classList.remove('hidden');
-        applyCurrentEffect = window.applyHeat;
+        window.applyCurrentEffect = window.applyHeat;
         break;
     }
-    window.applyCurrentEffect = applyCurrentEffect;
-    window.togglePreviewFilter = togglePreviewFilter;
   };
+  window.applyCurrentEffect = applyCurrentEffect;
+  window.togglePreviewFilter = togglePreviewFilter;
 })();
