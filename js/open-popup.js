@@ -1,7 +1,9 @@
 'use strict';
 
 (function () {
-  var openPopup = function (uploadForm, scaleValue) {
+  var uploadForm = document.querySelector('.img-upload__overlay');
+
+  var openPopup = function () {
     uploadForm.classList.remove('hidden');
     window.scaleValue.value = '100%';
   };

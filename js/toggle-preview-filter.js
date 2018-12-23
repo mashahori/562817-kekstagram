@@ -10,7 +10,7 @@
   var applyCurrentEffect = function () {}; // по умолчанию пустая функция
 
   var togglePreviewFilter = function (evt) {
-    window.effectLevelPin.style.left = '100%';
+    effectLevelPin.style.left = '100%';
     effectLevelValue.value = 100;
     effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
     var target = evt.target.value;
