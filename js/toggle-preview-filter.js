@@ -10,7 +10,6 @@
   // var applyCurrentEffect = function () {}; // по умолчанию пустая функция
 
   var togglePreviewFilter = function (evt) {
-    console.log('lujhv')
     effectLevelPin.style.left = '100%';
     effectLevelValue.value = 100;
     effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
@@ -28,7 +27,7 @@
       case 'sepia':
         window.fullPhotoContainer.style.filter = 'sepia(1)';
         effectLevel.classList.remove('hidden');
-        applyCurrentEffect = window.applySepia;
+        window.applyCurrentEffect = window.applySepia;
         break;
       case 'marvin':
         window.fullPhotoContainer.style.filter = 'invert(100%)';
@@ -47,6 +46,5 @@
         break;
     }
   };
-  window.applyCurrentEffect = applyCurrentEffect;
   window.togglePreviewFilter = togglePreviewFilter;
 })();
