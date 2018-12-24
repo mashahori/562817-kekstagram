@@ -3,7 +3,6 @@
 (function () {
   var MAX_SCALE = 100;
   var SCALE_STEP = 25;
-  // var scaleValue = document.querySelector('.scale__control--value');
 
   var makePictureBigger = function () {
     var currentScale = window.scaleValue.value;

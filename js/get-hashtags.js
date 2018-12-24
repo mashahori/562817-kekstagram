@@ -11,15 +11,15 @@
       var newArrayHashtag = [];
       var flagSum = 0;
       for (var index = 0; index < arrayHashtags.length; index++) {
-        if (!newArrayHashtag.includes(index)) {
-          flagSum += window.checkHashtag(index);
-          newArrayHashtag.push(index);
+        if (!newArrayHashtag.includes(arrayHashtags[index])) {
+          flagSum += window.checkHashtag(arrayHashtags[index]);
+          newArrayHashtag.push(arrayHashtags[index]);
         } else {
           textHashtags.setCustomValidity('Хэштеги не должны повторяться!');
         }
       }
       if (flagSum === arrayHashtags.length) {
-        textHashtags.setCustomValidity('Все ок!');
+        textHashtags.setCustomValidity(''); // Все ок, поэтому сбрасываем сообщение и отправляем форму
       } else {
         textHashtags.setCustomValidity('Ошибка!');
       }
