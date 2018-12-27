@@ -4,6 +4,14 @@
   var ENTER_BUTTON = 13;
   var pictureClose = document.querySelector('.big-picture__cancel');
 
+  var onError = function () {
+    // console.error(message);
+  };
+
+  var onSuccess = function () {
+    // console.log(data);
+  };
+
   window.load('https://js.dump.academy/kekstagram/data', onSuccess, onError);
 
   window.similarListElement.addEventListener('click', window.showBigPicture);
