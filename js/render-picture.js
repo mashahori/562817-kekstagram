@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var PICTURES_COUNT = 25;
-  // var pictures = window.makePictures(PICTURES_COUNT);
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
   var renderPicture = function (picture) {
@@ -15,7 +13,7 @@
 
     return pictureElement;
   };
-    var similarListElement = document.querySelector('.pictures');
+  var similarListElement = document.querySelector('.pictures');
 
   var onLoad = function (pictures) {
     var fragment = document.createDocumentFragment();

@@ -2,16 +2,14 @@
 
 (function () {
   var ENTER_BUTTON = 13;
-  var PICTURES_COUNT = 25;
-  // var pictures = window.makePictures(PICTURES_COUNT);
   var pictureClose = document.querySelector('.big-picture__cancel');
 
   var onError = function (message) {
-    console.error(message);
+    // console.error(message);
   };
 
   var onSuccess = function (data) {
-    console.log(data);
+    // console.log(data);
   };
 
   window.load('https://js.dump.academy/kekstagram/data', onSuccess, onError);
@@ -40,7 +38,7 @@
   });
 
   uploadFormSend.addEventListener('submit', function (evt) {
-    window.upload(new FormData(uploadFormSend), function (response) {
+    window.upload(new FormData(uploadFormSend), function () {
       uploadForm.classList.add('hidden');
 
       uploadFormSend.reset();
