@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
-  var onError = function (message) {
-    console.error(message);
+  var onErrorMessage = function (message) {
+    console.log(message);
   };
 
-  var onSuccess = function (data) {
+  var onSuccessData = function (data) {
     console.log(data);
   };
 
@@ -41,7 +41,7 @@
   };
 
   window.upload = function (data, onSuccess) {
-    URL = 'https://js.dump.academy/kekstagram';
+    var URL = 'https://js.dump.academy/kekstagram';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -57,6 +57,6 @@
     xhr.open('POST', URL);
     xhr.send(data);
   };
-    window.load('https://js.dump.academy/kekstagram/data', onSuccess, onError);
+
+  window.load('https://js.dump.academy/kekstagram/data', onSuccessData, onErrorMessage);
 })();
-URL

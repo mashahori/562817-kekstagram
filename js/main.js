@@ -21,6 +21,9 @@
   var scaleSmaller = document.querySelector('.scale__control--smaller');
   var scaleBigger = document.querySelector('.scale__control--bigger');
 
+  var successButton = document.querySelector('.success__button');
+  var successOverlay = document.querySelector('.success');
+
   uploadFile.addEventListener('change', function () {
     window.openPopup(uploadForm, window.scaleValue);
     window.effectLevel.classList.add('hidden');
@@ -39,11 +42,11 @@
       var successTemplate = document.querySelector('#success').content.querySelector('.success');
       document.querySelector('main').appendChild(successTemplate);
 
-      document.querySelector('.success__button').addEventListener('click', function () {
+      successButton.addEventListener('click', function () {
         document.querySelector('main').removeChild(successTemplate);
       });
 
-      document.querySelector('.success').addEventListener('click', function () {
+      successOverlay.addEventListener('click', function () {
         document.querySelector('main').removeChild(successTemplate);
       });
     });
