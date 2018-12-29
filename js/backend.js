@@ -1,12 +1,22 @@
 'use strict';
 
 (function () {
+  var onError = function (message) {
+    console.error(message);
+  };
+
+  var onSuccess = function (data) {
+    console.log(data);
+  };
+
   window.load = function (url, onSuccess, onError) {
+    var TIMEOUT = 1000;
+    var OK_STATUS = 200;
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === OK_STATUS) {
         onSuccess(xhr.response);
         window.onLoad(xhr.response);
       } else {
@@ -22,7 +32,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000;
+    xhr.timeout = TIMEOUT;
 
     xhr.open('GET', url);
     xhr.send();
@@ -31,6 +41,7 @@
   };
 
   window.upload = function (data, onSuccess) {
+    URL = 'https://js.dump.academy/kekstagram';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -43,7 +54,9 @@
       document.querySelector('main').appendChild(errorTemplate);
     });
 
-    xhr.open('POST', 'https://js.dump.academy/kekstagram');
+    xhr.open('POST', URL);
     xhr.send(data);
   };
+    window.load('https://js.dump.academy/kekstagram/data', onSuccess, onError);
 })();
+URL
