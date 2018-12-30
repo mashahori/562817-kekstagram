@@ -1,6 +1,8 @@
+'use strict';
+
 (function () {
-    var uploadForm = document.querySelector('.img-upload__overlay');
-    var uploadFormSend = document.querySelector('.img-upload__form');
+  var uploadForm = document.querySelector('.img-upload__overlay');
+  var uploadFormSend = document.querySelector('.img-upload__form');
 
   var submitFormSendReset = function () {
     uploadForm.classList.add('hidden');
