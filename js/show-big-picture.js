@@ -7,8 +7,9 @@
       return;
     }
     window.bigPicture.classList.remove('hidden');
-    var targetNumber = target.id.charAt(1);
-    window.createBigPicture(targetNumber);
+    var targetObject = target.pictureData;
+    window.createBigPicture(targetObject);
+    window.putComments(targetObject);
   };
   window.showBigPicture = showBigPicture;
 })();

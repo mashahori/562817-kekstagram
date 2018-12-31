@@ -46,5 +46,6 @@
         break;
     }
   };
+  window.effectLevel = effectLevel;
   window.togglePreviewFilter = togglePreviewFilter;
 })();
