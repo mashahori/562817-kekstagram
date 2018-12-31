@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var loadShowError = function (message) {}
+  var loadShowError = function () {};
 
   window.load = function (url, onSuccess, onError) {
     var TIMEOUT = 1000;
@@ -14,7 +14,7 @@
       if (xhr.status === OK_STATUS) {
         onSuccess(xhr.response);
       } else {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+        onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
       }
     });
 

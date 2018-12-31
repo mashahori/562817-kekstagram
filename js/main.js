@@ -28,7 +28,7 @@
     document.addEventListener('keydown', window.onPopupEscPress);
   });
 
-  var uploadShowError = function (message) {}
+  var uploadShowError = function () {};
 
   uploadFormSend.addEventListener('submit', function (evt) {
     window.upload(new FormData(uploadFormSend), window.submitFormSendReset, uploadShowError());
