@@ -28,8 +28,10 @@
     document.addEventListener('keydown', window.onPopupEscPress);
   });
 
+  var uploadShowError = function (message) {}
+
   uploadFormSend.addEventListener('submit', function (evt) {
-    window.upload(new FormData(uploadFormSend), window.submitFormSendReset());
+    window.upload(new FormData(uploadFormSend), window.submitFormSendReset, uploadShowError());
     evt.preventDefault();
   });
 
