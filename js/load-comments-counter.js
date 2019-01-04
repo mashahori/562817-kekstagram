@@ -7,6 +7,7 @@
     var defaultComments;
     if (commentsCount <= 5) {
       defaultComments = commentsCount;
+      document.querySelector('.comments-loader').classList.add('hidden');
     } else {
       defaultComments = 5;
     }
@@ -16,8 +17,9 @@
 
   var loadCommentsCounter = function (commentsCount, currentComments) {
     var loadComments = currentComments + 5;
-    if (loadComments > commentsCount){
+    if (loadComments > commentsCount) {
       loadComments = commentsCount;
+      document.querySelector('.comments-loader').classList.add('hidden');
     }
     showCounter.textContent = loadComments + ' из ' + commentsCount;
     return loadComments;

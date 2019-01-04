@@ -11,14 +11,13 @@
     var targetObject = target.pictureData;
     window.createBigPicture(targetObject);
     window.putComments(targetObject, window.defaultCommentsCounter(targetObject.comments.length));
-          var currentComments = 5;
+    var currentComments = 5;
 
     var commentsLoader = document.querySelector('.comments-loader');
-    commentsLoader.addEventListener('click', function (evt) {
-
-      evt.preventDefault();
+    commentsLoader.addEventListener('click', function (evtLoader) {
+      evtLoader.preventDefault();
       currentComments = window.putComments(targetObject, window.loadCommentsCounter(targetObject.comments.length, currentComments));
-     });
+    });
     window.targetObject = targetObject;
   };
   window.showBigPicture = showBigPicture;

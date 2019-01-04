@@ -9,6 +9,7 @@
 
   pictureClose.addEventListener('click', function () {
     window.bigPicture.classList.add('hidden');
+    document.querySelector('.comments-loader').classList.remove('hidden');
   });
 
   var uploadFile = document.querySelector('#upload-file');
