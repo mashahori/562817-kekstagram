@@ -1,31 +1,28 @@
 'use strict';
 
 (function () {
+  var showCounter = document.querySelector('.social__comment-count');
+
   var defaultCommentsCounter = function (commentsCount) {
     var defaultComments;
     if (commentsCount <= 5) {
       defaultComments = commentsCount;
-    }
-    if (commentsCount > 5) {
+    } else {
       defaultComments = 5;
     }
+    showCounter.textContent = defaultComments + ' из ' + commentsCount;
     return defaultComments;
   };
 
-  var loadCommentsCounter = function (commentsCount) {
-    var loadComments;
-    if (commentsCount <= 5) {
+  var loadCommentsCounter = function (commentsCount, currentComments) {
+    var loadComments = currentComments + 5;
+    if (loadComments > commentsCount){
       loadComments = commentsCount;
     }
-
-    if (commentsCount > 5 && commentsCount <= 10) {
-      loadComments = commentsCount;
-    }
-    if (commentsCount > 10 && commentsCount <= 15) {
-      loadComments = 10;
-    }
+    showCounter.textContent = loadComments + ' из ' + commentsCount;
     return loadComments;
   };
+
   window.loadCommentsCounter = loadCommentsCounter;
   window.defaultCommentsCounter = defaultCommentsCounter;
 })();

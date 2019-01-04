@@ -7,7 +7,7 @@
   var createBigPicture = function (pictureObject) {
     bigPictureImg.src = pictureObject.url;
     bigPicture.querySelector('.likes-count').textContent = pictureObject.likes;
-    bigPicture.querySelector('.comments-count').textContent = pictureObject.comments.length;
+    // bigPicture.querySelector('.comments-count').textContent = pictureObject.comments.length;
     bigPicture.querySelector('.social__caption').textContent = pictureObject.description;
   };
 
@@ -26,6 +26,7 @@
       socialComment.querySelector('.social__text').textContent = pictureObject.comments[j].message;
       socialComment.querySelector('.social__picture').src = pictureObject.comments[j].avatar;
     }
+    return commentsCount;
   };
   window.putComments = putComments;
   window.createBigPicture = createBigPicture;
