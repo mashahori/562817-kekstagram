@@ -11,9 +11,6 @@
     window.bigPicture.classList.add('hidden');
   });
 
-  document.querySelector('.social__comment-count').classList.add('visually-hidden');
-  document.querySelector('.comments-loader').classList.add('visually-hidden');
-
   var uploadFile = document.querySelector('#upload-file');
   var uploadForm = document.querySelector('.img-upload__overlay');
   var uploadFormSend = document.querySelector('.img-upload__form');
@@ -57,5 +54,9 @@
   var textHashtags = document.querySelector('.text__hashtags');
 
   textHashtags.addEventListener('input', window.getHashtags);
+
+  var commentsLoader = document.querySelector('.comments-loader');
+  commentsLoader.addEventListener('click', window.putComments(window.targetObject,
+     window.loadCommentsCounter(window.targetObject.comments.length)));
 
 })();

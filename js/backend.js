@@ -12,6 +12,7 @@
 
     xhr.addEventListener('load', function () {
       if (xhr.status === OK_STATUS) {
+        console.log(xhr.response);
         onSuccess(xhr.response);
       } else {
         onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');

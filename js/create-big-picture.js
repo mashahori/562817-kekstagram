@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var COMMENTS_COUNT = 5;
   var bigPicture = document.querySelector('.big-picture');
   var bigPictureImg = bigPicture.querySelector('img');
 
@@ -15,12 +14,13 @@
   var socialComment = document.querySelector('.social__comment');
   var socialComments = document.querySelector('.social__comments');
 
-  var putComments = function (pictureObject) {
+
+  var putComments = function (pictureObject, commentsCount) {
     while (socialComments.firstChild) {
       socialComments.removeChild(socialComments.firstChild);
     }
 
-    for (var j = 0; j < COMMENTS_COUNT; j++) {
+    for (var j = 0; j < commentsCount; j++) {
       socialComment = socialComment.cloneNode(true);
       socialComments.appendChild(socialComment);
       socialComment.querySelector('.social__text').textContent = pictureObject.comments[j].message;
