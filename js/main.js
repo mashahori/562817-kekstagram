@@ -57,6 +57,6 @@
 
   var commentsLoader = document.querySelector('.comments-loader');
   commentsLoader.addEventListener('click', window.putComments(window.targetObject,
-     window.loadCommentsCounter(window.targetObject.comments.length)));
+      window.loadCommentsCounter(window.targetObject.comments.length)));
 
 })();
