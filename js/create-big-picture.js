@@ -7,7 +7,6 @@
   var createBigPicture = function (pictureObject) {
     bigPictureImg.src = pictureObject.url;
     bigPicture.querySelector('.likes-count').textContent = pictureObject.likes;
-    // bigPicture.querySelector('.comments-count').textContent = pictureObject.comments.length;
     bigPicture.querySelector('.social__caption').textContent = pictureObject.description;
   };
 

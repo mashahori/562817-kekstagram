@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  // var DEFAULT_COMMENTS = 5;
+  var DEFAULT_COMMENTS = 5;
   var showBigPicture = function (evt) {
     var target = evt.target;
     if (!target.classList.contains('picture__img')) {
@@ -11,7 +11,7 @@
     var targetObject = target.pictureData;
     window.createBigPicture(targetObject);
     window.putComments(targetObject, window.defaultCommentsCounter(targetObject.comments.length));
-    var currentComments = 5;
+    var currentComments = DEFAULT_COMMENTS;
 
     var commentsLoader = document.querySelector('.comments-loader');
     commentsLoader.addEventListener('click', function (evtLoader) {
