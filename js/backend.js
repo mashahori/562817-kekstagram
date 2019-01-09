@@ -4,7 +4,7 @@
   var TIMEOUT = 1000;
   var OK_STATUS = 200;
   var URL = 'https://js.dump.academy/kekstagram';
-  var URL_DATA = 'https://js.dump.academy/kekstagram/data' ;
+  var URL_DATA = 'https://js.dump.academy/kekstagram/data';
 
   var loadShowError = function () {};
 
