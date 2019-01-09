@@ -17,7 +17,6 @@
 
       effectStartCoords = evtMove.offsetX;
 
-      var position = effectStartCoords - shift;
       var lineWidth = effectLevelLine.offsetWidth;
       position = Math.round((effectStartCoords / lineWidth) * 100);
       if (position < 100 && position > 0) {

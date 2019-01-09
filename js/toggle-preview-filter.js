@@ -7,7 +7,6 @@
   var effectLevel = document.querySelector('.effect-level');
   var effectLevelPin = document.querySelector('.effect-level__pin');
 
-  // var applyCurrentEffect = function () {}; // по умолчанию пустая функция
 
   var togglePreviewFilter = function (evt) {
     effectLevelPin.style.left = '100%';
