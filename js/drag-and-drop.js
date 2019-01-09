@@ -13,13 +13,10 @@
     var onMouseMove = function (evtMove) {
       evtMove.preventDefault();
 
-      var shift = evtMove.offsetX - effectStartCoords;
-
       effectStartCoords = evtMove.offsetX;
 
-      var position = effectStartCoords - shift;
       var lineWidth = effectLevelLine.offsetWidth;
-      position = Math.round((effectStartCoords / lineWidth) * 100);
+      var position = Math.round((effectStartCoords / lineWidth) * 100);
       if (position < 100 && position > 0) {
         effectLevelPin.style.left = position + '%';
         effectLevelValue.value = position * 100;
