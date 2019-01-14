@@ -7,13 +7,17 @@
   var fullPhotoContainer = document.querySelector('.img-upload__preview').querySelector('IMG');
   var effectLevel = document.querySelector('.effect-level');
 
-  var submitFormSendReset = function () {
+  var resetForm = function () {
     uploadForm.classList.add('hidden');
     document.querySelector('.img-upload__preview').querySelector('img').src = '';
     uploadFormSend.reset();
     fullPhotoContainer.style.transform = 'scale(1)';
     fullPhotoContainer.style.filter = '';
     effectLevel.classList.add('hidden');
+  }
+
+  var submitFormSendReset = function () {
+    resetForm();
 
     var successTemplate = document.querySelector('#success').content.querySelector('.success');
     var successElement = successTemplate.cloneNode(true);
@@ -39,4 +43,5 @@
     });
   };
   window.submitFormSendReset = submitFormSendReset;
+  window.resetForm = resetForm;
 })();

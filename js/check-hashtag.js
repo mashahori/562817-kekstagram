@@ -6,7 +6,7 @@
     var someResult;
     if (elementHashtag.length === 0) {
       someResult = 0;
-      textHashtags.setCustomValidity('Лишний пробел');
+      textHashtags.setCustomValidity('');
     } else if (elementHashtag.charAt(0) !== '#') {
         someResult = 0;
         textHashtags.setCustomValidity('# - первый символ в хэштеге');

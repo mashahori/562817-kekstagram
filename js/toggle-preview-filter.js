@@ -10,9 +10,6 @@
 
 
   var togglePreviewFilter = function (evt) {
-    effectLevelPin.style.left = '100%';
-    effectLevelValue.value ='100';
-    effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
     var target = evt.target.value;
     switch (target) {
       case 'none':
@@ -45,6 +42,9 @@
         window.applyCurrentEffect = window.applyHeat;
         break;
     }
+    effectLevelPin.style.left = '100%';
+    effectLevelValue.value ='100';
+    effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
   };
 
   window.togglePreviewFilter = togglePreviewFilter;

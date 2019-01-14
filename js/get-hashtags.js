@@ -16,6 +16,7 @@
           newArrayHashtag.push(arrayHashtags[index]);
         } else {
           textHashtags.setCustomValidity('Хэштеги не должны повторяться!');
+          break;
         }
       }
       if (flagSum === arrayHashtags.length) {

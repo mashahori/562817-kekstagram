@@ -27,8 +27,6 @@
     effectLevel.classList.add('hidden');
   });
 
-  document.addEventListener('keydown', window.onPopupEscPress);
-
   var uploadShowError = function () {};
 
   uploadFormSend.addEventListener('submit', function (evt) {
