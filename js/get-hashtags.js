@@ -2,6 +2,7 @@
 
 (function () {
   var textHashtags = document.querySelector('.text__hashtags');
+  var textareaDescription = document.querySelector('.text__description');
 
   var getHashtags = function () {
     var hashtags = textHashtags.value;
@@ -26,5 +27,16 @@
       textHashtags.setCustomValidity('Не больше 5 хэштегов!');
     }
   };
+
+  var getTextarea = function () {
+    var textareaComment = textareaDescription.value;
+    if (textareaComment.length > 140) {
+      textareaDescription.setCustomValidity('Слишком длинный комментарий');
+    } else {
+      textareaDescription.setCustomValidity('');
+    }
+  };
+
   window.getHashtags = getHashtags;
+  window.getTextarea = getTextarea;
 })();
