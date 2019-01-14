@@ -4,7 +4,7 @@
   var MIN_SCALE = 25;
   var SCALE_STEP = 25;
   var scaleValue = document.querySelector('.scale__control--value');
-  var fullPhotoContainer = document.querySelector('.img-upload__preview');
+  var fullPhotoContainer = document.querySelector('.img-upload__preview').querySelector('IMG');
 
   var makePictureSmaller = function () {
     var currentScale = scaleValue.value;
@@ -17,7 +17,6 @@
       scaleValue.value = '25%';
     }
   };
-  window.scaleValue = scaleValue;
-  window.fullPhotoContainer = fullPhotoContainer;
+
   window.makePictureSmaller = makePictureSmaller;
 })();

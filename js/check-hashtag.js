@@ -2,14 +2,21 @@
 
 (function () {
   var checkHashtag = function (elementHashtag) {
-    var firstCharNotSharp = elementHashtag.charAt(0) !== '#';
-    var tooLongHashtag = elementHashtag.length >= 20;
-    var hasOneElement = elementHashtag.length === 1;
-    if (firstCharNotSharp || tooLongHashtag || hasOneElement) {
-      return 0;
+    var textHashtags = document.querySelector('.text__hashtags');
+    var someResult = 0;
+    if (elementHashtag.length === 0) {
+      textHashtags.setCustomValidity('');
+    } else if (elementHashtag.charAt(0) !== '#') {
+      textHashtags.setCustomValidity('# - первый символ в хэштеге');
+    } else if (elementHashtag.length <= 1) {
+      textHashtags.setCustomValidity('Слишком короткий хэштег');
+    } else if (elementHashtag.length >= 20) {
+      textHashtags.setCustomValidity('Слишком длинный хэштег');
     } else {
-      return 1;
+      someResult = 1;
+      textHashtags.setCustomValidity('');
     }
+    return someResult;
   };
   window.checkHashtag = checkHashtag;
 })();

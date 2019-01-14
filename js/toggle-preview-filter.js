@@ -6,45 +6,46 @@
   var effectLevelLine = document.querySelector('.effect-level__line');
   var effectLevel = document.querySelector('.effect-level');
   var effectLevelPin = document.querySelector('.effect-level__pin');
+  var fullPhotoContainer = document.querySelector('.img-upload__preview').querySelector('IMG');
 
 
   var togglePreviewFilter = function (evt) {
-    effectLevelPin.style.left = '100%';
-    effectLevelValue.value = 100;
-    effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
     var target = evt.target.value;
     switch (target) {
       case 'none':
-        window.fullPhotoContainer.style.filter = '';
+        fullPhotoContainer.style.filter = '';
         effectLevel.classList.add('hidden');
         break;
       case 'chrome':
-        window.fullPhotoContainer.style.filter = 'grayscale(1)';
+        fullPhotoContainer.style.filter = 'grayscale(1)';
         effectLevel.classList.remove('hidden');
         window.applyCurrentEffect = window.applyChrome;
         break;
       case 'sepia':
-        window.fullPhotoContainer.style.filter = 'sepia(1)';
+        fullPhotoContainer.style.filter = 'sepia(1)';
         effectLevel.classList.remove('hidden');
         window.applyCurrentEffect = window.applySepia;
         break;
       case 'marvin':
-        window.fullPhotoContainer.style.filter = 'invert(100%)';
+        fullPhotoContainer.style.filter = 'invert(100%)';
         effectLevel.classList.remove('hidden');
         window.applyCurrentEffect = window.applyMarvin;
         break;
       case 'phobos':
-        window.fullPhotoContainer.style.filter = 'blur(3px)';
+        fullPhotoContainer.style.filter = 'blur(3px)';
         effectLevel.classList.remove('hidden');
         window.applyCurrentEffect = window.applyPhobos;
         break;
       case 'heat':
-        window.fullPhotoContainer.style.filter = 'brightness(3)';
+        fullPhotoContainer.style.filter = 'brightness(3)';
         effectLevel.classList.remove('hidden');
         window.applyCurrentEffect = window.applyHeat;
         break;
     }
+    effectLevelPin.style.left = '100%';
+    effectLevelValue.value = 100;
+    effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
   };
-  window.effectLevel = effectLevel;
+
   window.togglePreviewFilter = togglePreviewFilter;
 })();

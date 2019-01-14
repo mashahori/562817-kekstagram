@@ -5,7 +5,7 @@
 
   var openPopup = function () {
     uploadForm.classList.remove('hidden');
-    window.scaleValue.value = '100%';
+    document.addEventListener('keydown', window.onPopupEscPress);
   };
   window.openPopup = openPopup;
 })();

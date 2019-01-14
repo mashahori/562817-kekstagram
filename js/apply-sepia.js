@@ -1,8 +1,9 @@
 'use strict';
 
 (function () {
+  var fullPhotoContainer = document.querySelector('.img-upload__preview').querySelector('IMG');
   var applySepia = function (filterPosition) {
-    window.fullPhotoContainer.style.filter = 'sepia(' + filterPosition / 100 + ')';
+    fullPhotoContainer.style.filter = 'sepia(' + filterPosition / 100 + ')';
   };
   window.applySepia = applySepia;
 })();

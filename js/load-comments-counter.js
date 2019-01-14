@@ -21,7 +21,6 @@
     var loadComments = currentComments + PART_OF_COMMENTS;
     if (loadComments > commentsCount) {
       loadComments = commentsCount;
-      commentsLoaderButton.classList.add('hidden');
     }
     showCounter.textContent = loadComments + ' из ' + commentsCount;
     return loadComments;

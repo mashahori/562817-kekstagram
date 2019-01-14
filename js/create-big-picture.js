@@ -29,5 +29,4 @@
   };
   window.putComments = putComments;
   window.createBigPicture = createBigPicture;
-  window.bigPicture = bigPicture;
 })();
