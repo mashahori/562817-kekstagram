@@ -7,7 +7,7 @@
     var hashtags = textHashtags.value;
     hashtags.toLowerCase();
     var arrayHashtags = hashtags.split(' ');
-    if (arrayHashtags.length < 5) {
+    if (arrayHashtags.length < 6) {
       var newArrayHashtag = [];
       var flagSum = 0;
       for (var index = 0; index < arrayHashtags.length; index++) {
@@ -20,13 +20,10 @@
       }
       if (flagSum === arrayHashtags.length) {
         textHashtags.setCustomValidity(''); // Все ок, поэтому сбрасываем сообщение и отправляем форму
-      } else {
-        textHashtags.setCustomValidity('Ошибка!');
       }
     } else {
       textHashtags.setCustomValidity('Не больше 5 хэштегов!');
     }
   };
-  window.textHashtags = textHashtags;
   window.getHashtags = getHashtags;
 })();

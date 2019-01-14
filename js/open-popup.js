@@ -5,7 +5,6 @@
 
   var openPopup = function () {
     uploadForm.classList.remove('hidden');
-    window.scaleValue.value = '100%';
   };
   window.openPopup = openPopup;
 })();

@@ -1,8 +1,10 @@
 'use strict';
 
 (function () {
+  var fullPhotoContainer = document.querySelector('.img-upload__preview').querySelector('IMG');
+
   var applyMarvin = function (filterPosition) {
-    window.fullPhotoContainer.style.filter = 'invert(' + filterPosition + '%)';
+    fullPhotoContainer.style.filter = 'invert(' + filterPosition + '%)';
   };
   window.applyMarvin = applyMarvin;
 })();
