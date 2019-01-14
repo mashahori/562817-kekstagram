@@ -8,19 +8,36 @@
 
   var dragAndDrop = function (evtStart) {
     evtStart.preventDefault();
-    var effectStartCoords = evtStart.offsetX;
 
+    var startX = evtStart.clientX;
+    var pinWidth = effectLevelPin.offsetWidth;
+
+    var dragged = false;
+
+  //   var effectStartCoords = evtStart.offsetX;
+  //
     var onMouseMove = function (evtMove) {
       evtMove.preventDefault();
 
-      effectStartCoords = evtMove.offsetX;
+      dragged = true;
 
-      var lineWidth = effectLevelLine.offsetWidth;
-      var position = Math.round((effectStartCoords / lineWidth) * 100);
-      if (position < 100 && position > 0) {
-        effectLevelPin.style.left = position + '%';
-        effectLevelValue.value = position * 100;
-        effectLevelDepth.style.width = position + '%';
+      var shift = startX - evtMove.clientX;
+
+      startX = evtMove.clientX;
+
+      var newPinOffset = effectLevelPin.offsetLeft - shift;
+
+      if (newPinOffset > effectLevelLine.offsetWidth) {
+        effectLevelPin.style.left = effectLevelLine.offsetWidth + 'px';
+      } else if (newPinOffset < 0) {
+        effectLevelPin.style.left = 0 + 'px';
+      } else {
+        effectLevelPin.style.left = effectLevelPin.offsetLeft - shift + 'px';
+
+        effectLevelDepth.style.width = effectLevelPin.offsetLeft + 'px';
+
+        var position = (effectLevelPin.offsetLeft / effectLevelLine.offsetWidth) * 100;
+        effectLevelValue.value = position;
         window.applyCurrentEffect(position);
       }
     };

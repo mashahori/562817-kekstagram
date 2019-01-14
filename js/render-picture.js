@@ -31,9 +31,10 @@
 
   var toggleFilter = function (picturesArray) {
 
-    while (similarListElement.firstChild) {
-      similarListElement.removeChild(similarListElement.firstChild);
-    }
+    while (similarListElement.querySelector('.picture')) {
+        similarListElement.removeChild(similarListElement.querySelector('.picture'));
+      }
+
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < picturesArray.length; i++) {
