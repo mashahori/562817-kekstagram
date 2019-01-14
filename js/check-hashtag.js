@@ -3,7 +3,7 @@
 (function () {
   var checkHashtag = function (elementHashtag) {
     var textHashtags = document.querySelector('.text__hashtags');
-    var someResult;
+    var someResult = 0;
     if (elementHashtag.length === 0) {
       textHashtags.setCustomValidity('');
     } else if (elementHashtag.charAt(0) !== '#') {
