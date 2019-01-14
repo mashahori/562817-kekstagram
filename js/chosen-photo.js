@@ -25,6 +25,6 @@
 
       reader.readAsDataURL(file);
     }
-    document.querySelector('.scale__control--value').value= '100%';
+    document.querySelector('.scale__control--value').value = '100%';
   });
 })();
