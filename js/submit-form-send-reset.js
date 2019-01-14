@@ -14,7 +14,7 @@
     fullPhotoContainer.style.transform = 'scale(1)';
     fullPhotoContainer.style.filter = '';
     effectLevel.classList.add('hidden');
-  }
+  };
 
   var submitFormSendReset = function () {
     resetForm();

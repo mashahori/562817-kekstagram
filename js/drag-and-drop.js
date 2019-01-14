@@ -10,16 +10,9 @@
     evtStart.preventDefault();
 
     var startX = evtStart.clientX;
-    var pinWidth = effectLevelPin.offsetWidth;
 
-    var dragged = false;
-
-  //   var effectStartCoords = evtStart.offsetX;
-  //
     var onMouseMove = function (evtMove) {
       evtMove.preventDefault();
-
-      dragged = true;
 
       var shift = startX - evtMove.clientX;
 

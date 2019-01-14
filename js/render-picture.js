@@ -6,12 +6,12 @@
   var renderPicture = function (picture) {
     var pictureElement = pictureTemplate.cloneNode(true);
 
-      pictureElement.querySelector('.picture__img').src = picture.url;
-      pictureElement.querySelector('.picture__img').pictureData = picture; // создаем свойство, чтобы передать в него сам объект
-      pictureElement.querySelector('.picture__likes').textContent = picture.likes;
-      pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
+    pictureElement.querySelector('.picture__img').src = picture.url;
+    pictureElement.querySelector('.picture__img').pictureData = picture; // создаем свойство, чтобы передать в него сам объект
+    pictureElement.querySelector('.picture__likes').textContent = picture.likes;
+    pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
 
-      return pictureElement;
+    return pictureElement;
 
   };
 
@@ -32,16 +32,16 @@
   var toggleFilter = function (picturesArray) {
 
     while (similarListElement.querySelector('.picture')) {
-        similarListElement.removeChild(similarListElement.querySelector('.picture'));
-      }
+      similarListElement.removeChild(similarListElement.querySelector('.picture'));
+    }
 
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < picturesArray.length; i++) {
       if (picturesArray[i] !== undefined) {
-      fragment.appendChild(renderPicture(picturesArray[i]));
+        fragment.appendChild(renderPicture(picturesArray[i]));
+      }
     }
-  }
     similarListElement.appendChild(fragment);
   };
 

@@ -43,7 +43,7 @@
         break;
     }
     effectLevelPin.style.left = '100%';
-    effectLevelValue.value ='100';
+    effectLevelValue.value = 100;
     effectLevelDepth.style.width = effectLevelLine.offsetWidth + 'px';
   };
 
