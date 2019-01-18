@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var MIN_HASHTAG_LENGTH = 1;
+  var MAX_HASHTAG_LENGTH = 20;
+  var MAX_DESCRIPTION_LENGTH = 140;
+  var MAX_COUNT_HASHTAGS = 5;
   var textHashtags = document.querySelector('.text__hashtags');
   var textareaDescription = document.querySelector('.text__description');
 
@@ -29,24 +33,24 @@
     return existOrNot;
   };
 
+  var highlightHashtag = function (invalidForm, message) {
+    invalidForm.setCustomValidity(message);
+    invalidForm.style.border = '2px solid red';
+  }
+
   var checkHashtag = function (hashtagsArray) {
     var validHashtagsSum = 0;
     for (var index = 0; index < hashtagsArray.length; index++) {
       if (hashtagsArray[index].charAt(0) !== '#') {
-        textHashtags.setCustomValidity('# - первый символ в хэштеге');
-        textHashtags.style.border = '2px solid red';
-      } else if (hashtagsArray[index].length < 2) {
-        textHashtags.setCustomValidity('Слишком короткий хэштег');
-        textHashtags.style.border = '2px solid red';
+        highlightHashtag(textHashtags, '# - первый символ в хэштеге');
+      } else if (hashtagsArray[index].length <= MIN_HASHTAG_LENGTH) {
+        highlightHashtag(textHashtags, 'Слишком короткий хэштег');
       } else if (hashtagsArray[index].indexOf('#', 1) > 0) {
-        textHashtags.setCustomValidity('# не может стоять внутри хэштега');
-        textHashtags.style.border = '2px solid red';
-      } else if (hashtagsArray[index].length > 20) {
-        textHashtags.setCustomValidity('Слишком длинный хэштег');
-        textHashtags.style.border = '2px solid red';
-      } else if (hashtagsArray.length > 5) {
-        textHashtags.setCustomValidity('Не больше 5 хэштегов');
-        textHashtags.style.border = '2px solid red';
+        highlightHashtag(textHashtags, '# не может стоять внутри хэштега');
+      } else if (hashtagsArray[index].length > MAX_HASHTAG_LENGTH) {
+        highlightHashtag(textHashtags, 'Слишком длинный хэштег');
+      } else if (hashtagsArray.length > MAX_COUNT_HASHTAGS) {
+        highlightHashtag(textHashtags, 'Не больше ' + MAX_COUNT_HASHTAGS + ' хэштегов');
       } else if (isElementExist(hashtagsArray)) {
         validHashtagsSum += 1;
       }
@@ -66,9 +70,9 @@
       if (arrayHashtags[symbol] === '') {
         arrayHashtags.splice(symbol, 1);
       }
-    }
-    while (arrayHashtags[0] === '') {
-      arrayHashtags.splice(0, 1);
+      if (arrayHashtags[0] === '') {
+        arrayHashtags.splice(0, 1);
+      }
     }
 
     if (checkHashtag(arrayHashtags)) {
@@ -78,9 +82,8 @@
 
   var getTextarea = function () {
     var textareaComment = textareaDescription.value;
-    if (textareaComment.length > 140) {
-      textareaDescription.setCustomValidity('Слишком длинный комментарий');
-      textareaDescription.style.border = '2px solid red';
+    if (textareaComment.length > MAX_DESCRIPTION_LENGTH) {
+      highlightHashtag(textareaDescription, 'Слишком длинный комментарий');
     } else {
       textareaDescription.setCustomValidity('');
       textareaDescription.style.border = 'none';
