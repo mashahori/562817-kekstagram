@@ -33,11 +33,9 @@
     effectLevel.classList.add('hidden');
   });
 
-  var uploadShowError = function () {};
-
   uploadFormSend.addEventListener('submit', function (evt) {
-    window.upload(new FormData(uploadFormSend), window.submitFormSendReset, uploadShowError());
     evt.preventDefault();
+    window.upload(new FormData(uploadFormSend), window.submitFormSendReset, window.uploadShowError);
   });
 
   uploadFormClose.addEventListener('click', window.closePopup);
@@ -48,37 +46,35 @@
     }
   });
 
-  document.querySelector('.text__hashtags').addEventListener('focus', function () {
-    document.removeEventListener('keydown', window.onPopupEscPress);
-  });
-
-  document.querySelector('.text__hashtags').addEventListener('blur', function () {
-    document.addEventListener('keydown', window.onPopupEscPress);
-  });
-
-  document.querySelector('.text__description').addEventListener('focus', function () {
-    document.removeEventListener('keydown', window.onPopupEscPress);
-  });
-
-  document.querySelector('.text__description').addEventListener('blur', function () {
-    document.addEventListener('keydown', window.onPopupEscPress);
-  });
 
   var effectLevelPin = document.querySelector('.effect-level__pin');
   var effectsList = document.querySelector('.effects__list');
 
   effectsList.addEventListener('change', window.togglePreviewFilter);
-
   effectLevelPin.addEventListener('mousedown', window.dragAndDrop);
 
   scaleSmaller.addEventListener('click', window.makePictureSmaller);
-
   scaleBigger.addEventListener('click', window.makePictureBigger);
+
 
   var textHashtags = document.querySelector('.text__hashtags');
   var textareaDescription = document.querySelector('.text__description');
 
   textHashtags.addEventListener('input', window.getHashtags);
   textareaDescription.addEventListener('input', window.getTextarea);
+
+  textHashtags.addEventListener('focus', function () {
+    document.removeEventListener('keydown', window.onPopupEscPress);
+  });
+  textHashtags.addEventListener('blur', function () {
+    document.addEventListener('keydown', window.onPopupEscPress);
+  });
+
+  textareaDescription.addEventListener('focus', function () {
+    document.removeEventListener('keydown', window.onPopupEscPress);
+  });
+  textareaDescription.addEventListener('blur', function () {
+    document.addEventListener('keydown', window.onPopupEscPress);
+  });
 
 })();

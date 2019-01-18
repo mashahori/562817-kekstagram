@@ -14,17 +14,28 @@
   var socialComments = document.querySelector('.social__comments');
 
 
+  var renderComment = function (pictureComment) {
+    socialComment = socialComment.cloneNode(true);
+
+    socialComment.querySelector('.social__text').textContent = pictureComment.message;
+    socialComment.querySelector('.social__picture').src = pictureComment.avatar;
+
+    return socialComment;
+  };
+
   var putComments = function (pictureObject, commentsCount) {
     while (socialComments.firstChild) {
       socialComments.removeChild(socialComments.firstChild);
     }
 
-    for (var j = 0; j < commentsCount; j++) {
-      socialComment = socialComment.cloneNode(true);
-      socialComments.appendChild(socialComment);
-      socialComment.querySelector('.social__text').textContent = pictureObject.comments[j].message;
-      socialComment.querySelector('.social__picture').src = pictureObject.comments[j].avatar;
+    var fragment = document.createDocumentFragment();
+
+    for (var i = 0; i < commentsCount; i++) {
+      fragment.appendChild(renderComment(pictureObject.comments[i]));
     }
+
+    socialComments.appendChild(fragment);
+
     return commentsCount;
   };
   window.putComments = putComments;

@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var NEW_PHOTOS_COUNT = 10;
+  var PHOTO_ELEMENTS_COUNT = 25;
+  var DEBOUNCE_TIMEOUT = 300;
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
   var renderPicture = function (picture) {
@@ -65,7 +68,7 @@
         return 0;
       });
       toggleFilter(commentsArrayCopy);
-    }, 300);
+    }, DEBOUNCE_TIMEOUT);
 
   });
 
@@ -76,14 +79,14 @@
 
     window.setTimeout(function () {
       toggleFilter(window.xhr.response);
-    }, 300);
+    }, DEBOUNCE_TIMEOUT);
   });
 
 
   var toggleFilterNew = function (picturesArray) {
     var newPhotosArray = [];
-    for (var i = 1; newPhotosArray.length !== 10; i++) {
-      var newPhotosElement = picturesArray[window.randomInteger(0, 25)];
+    for (var i = 1; newPhotosArray.length !== NEW_PHOTOS_COUNT; i++) {
+      var newPhotosElement = picturesArray[window.randomInteger(0, PHOTO_ELEMENTS_COUNT)];
       if (!newPhotosArray.includes(newPhotosElement)) {
         newPhotosArray.push(newPhotosElement);
       }
@@ -100,7 +103,7 @@
       var commentsArrayCopy = window.xhr.response.slice();
       commentsArrayCopy = toggleFilterNew(commentsArrayCopy);
       toggleFilter(commentsArrayCopy);
-    }, 300);
+    }, DEBOUNCE_TIMEOUT);
   });
 
   window.onLoad = onLoad;

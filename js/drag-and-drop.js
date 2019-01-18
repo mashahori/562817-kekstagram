@@ -30,7 +30,7 @@
         effectLevelDepth.style.width = effectLevelPin.offsetLeft + 'px';
 
         var position = (effectLevelPin.offsetLeft / effectLevelLine.offsetWidth) * 100;
-        effectLevelValue.value = position;
+        effectLevelValue.value = Math.round(position);
         window.applyCurrentEffect(position);
       }
     };
