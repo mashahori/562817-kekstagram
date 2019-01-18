@@ -42,6 +42,35 @@
       }
     });
   };
+
+  var uploadShowError = function () {
+    resetForm();
+
+    var errorTemplate = document.querySelector('#error').content.querySelector('.error');
+    var errorElement = errorTemplate.cloneNode(true);
+    var pageMain = document.querySelector('main');
+
+    pageMain.appendChild(errorElement);
+
+    document.querySelector('.error__buttons').addEventListener('click', function () {
+      if (pageMain.contains(errorElement)) {
+        pageMain.removeChild(errorElement);
+      }
+    });
+
+    document.querySelector('.error').addEventListener('click', function () {
+      if (pageMain.contains(errorElement)) {
+        document.querySelector('main').removeChild(errorElement);
+      }
+    });
+
+    document.addEventListener('keydown', function (evt) {
+      if (pageMain.contains(errorElement) && evt.keyCode === ESC_BUTTON) {
+        pageMain.removeChild(errorElement);
+      }
+    });
+  };
+  window.uploadShowError = uploadShowError;
   window.submitFormSendReset = submitFormSendReset;
   window.resetForm = resetForm;
 })();

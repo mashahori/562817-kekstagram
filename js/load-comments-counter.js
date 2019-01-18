@@ -9,7 +9,6 @@
     var defaultComments;
     if (commentsCount <= PART_OF_COMMENTS) {
       defaultComments = commentsCount;
-      commentsLoaderButton.classList.add('hidden');
     } else {
       defaultComments = PART_OF_COMMENTS;
     }

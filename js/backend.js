@@ -32,11 +32,11 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      onSuccess(xhr.response);
-    });
-
-    xhr.addEventListener('error', function () {
-      onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
+      if (xhr.status === OK_STATUS) {
+        onSuccess(xhr.response);
+      } else {
+        onError('Произошла ошибка');
+      }
     });
 
     xhr.open('POST', URL);
