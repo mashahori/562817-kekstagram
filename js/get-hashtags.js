@@ -36,7 +36,7 @@
   var highlightHashtag = function (invalidForm, message) {
     invalidForm.setCustomValidity(message);
     invalidForm.style.border = '2px solid red';
-  }
+  };
 
   var checkHashtag = function (hashtagsArray) {
     var validHashtagsSum = 0;
