@@ -3,7 +3,6 @@
 (function () {
   var PART_OF_COMMENTS = 5;
   var showCounter = document.querySelector('.social__comment-count');
-  var commentsLoaderButton = document.querySelector('.comments-loader');
 
   var defaultCommentsCounter = function (commentsCount) {
     var defaultComments;
